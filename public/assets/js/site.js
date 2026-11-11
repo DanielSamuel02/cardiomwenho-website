@@ -29,14 +29,20 @@
 
   /* ---------- Menu móvel ---------- */
   var nav = $("#nav"), scrim = $(".scrim"), openBtn = $(".menu-btn:not(.nav-close)"), closeBtn = $(".nav-close");
-  function setMenu(open) {
+  function setMenu(open, keepFocus) {
     if (!nav) return;
     nav.classList.toggle("is-open", open);
     scrim.classList.toggle("is-open", open);
+    document.body.classList.toggle("menu-open", open);
     openBtn.setAttribute("aria-expanded", String(open));
     document.body.style.overflow = open ? "hidden" : "";
+    if (keepFocus) return;
     if (open) { (nav.querySelector("a") || nav).focus(); } else { openBtn.focus(); }
   }
+  /* Ao escolher um link, fechar o menu (inclui links para secções da mesma página). */
+  if (nav) nav.addEventListener("click", function (e) {
+    if (e.target.closest("a") && nav.classList.contains("is-open")) setMenu(false, true);
+  });
   if (openBtn) openBtn.addEventListener("click", function () { setMenu(true); });
   if (closeBtn) closeBtn.addEventListener("click", function () { setMenu(false); });
   if (scrim) scrim.addEventListener("click", function () { setMenu(false); });

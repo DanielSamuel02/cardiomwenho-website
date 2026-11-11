@@ -798,3 +798,9 @@ h1, h2, h3 { hyphens: manual; -webkit-hyphens: manual; overflow-wrap: break-word
   .map__frame { min-height: 0; aspect-ratio: 4 / 3; }
   .map__card { border-left: 0; border-top: 4px solid var(--red); }
 }
+
+/* ---------- 25. Menu móvel: camada escura por baixo do cabeçalho ----------
+   O cabeçalho (sticky, z-index 60) cria o seu próprio contexto de empilhamento,
+   por isso a camada escura tem de ficar abaixo dele para os links serem clicáveis. */
+.scrim { z-index: 55; }
+body.menu-open .fab { opacity: 0; pointer-events: none; }
