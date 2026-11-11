@@ -5,7 +5,7 @@ Sem dependências externas. Os textos estão em scripts/content.py.
 """
 import html
 import pathlib
-from content import (SITE_URL, WA_MAIN, PHONES, ADDRESS, MAPS, AREAS, EXAMS, COURSES, VIDEOS, JOURNEY)
+from content import (SITE_URL, WA_MAIN, PHONES, ADDRESS, MAPS, MAPS_DIR, MAPS_EMBED, AREAS, EXAMS, COURSES, VIDEOS, JOURNEY)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "public"
@@ -247,6 +247,24 @@ def video_cards():
   <span class="vcard__meta"><b>{v["title"]}</b><span>{v["desc"]} {v["dur"]}</span></span>
 </button>''' for i, v in enumerate(VIDEOS))
 
+def map_block(heading=True):
+    """Mapa do Google incorporado, com morada e ações (abrir e direções)."""
+    h = '<h2 class="map__title">Onde estamos</h2>' if heading else ""
+    return f'''<div class="map" data-reveal>
+  <div class="map__frame">
+    <iframe src="{MAPS_EMBED}" title="Mapa com a localização da Cardiomwenho em São Pedro, Huambo" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  </div>
+  <div class="map__card">
+    {h}
+    <p class="map__addr">{I["pin"]} <span>{ADDRESS}</span></p>
+    <p class="map__note">Atendemos com agendamento. Confirme a hora pelo WhatsApp antes de vir.</p>
+    <div class="actions">
+      <a class="btn btn--red btn--sm" href="{MAPS_DIR}" target="_blank" rel="noopener">Como chegar</a>
+      <a class="btn btn--line btn--sm" href="{MAPS}" target="_blank" rel="noopener">Abrir no Google Maps</a>
+    </div>
+  </div>
+</div>'''
+
 LIGHTBOX = f'''<dialog class="lightbox" id="lightbox" aria-label="Vídeo">
   <button class="close" type="button" aria-label="Fechar vídeo">{I["close"]}</button>
   <figure style="margin:0"><video controls playsinline preload="none"></video><figcaption></figcaption></figure>
@@ -379,6 +397,10 @@ home = f'''
   </div>
 </div></section>
 
+<section class="section section--paper" id="localizacao"><div class="wrap">
+  {map_block()}
+</div></section>
+
 <section class="section section--navy"><div class="wrap contact">
   <div data-reveal="left">
     <h2>A sua saúde é a nossa prioridade.</h2>
@@ -499,7 +521,7 @@ guia = phero(["Guia do doente"], "O seu exame, passo a passo",
         <li>A equipa recebe-o, confirma os seus dados e explica cada passo antes de começar.</li>
         <li>Durante o exame, diga de imediato se sentir algum desconforto.</li>
       </ul>
-      <div class="actions"><a class="btn btn--line btn--sm" href="{MAPS}" target="_blank" rel="noopener">Como chegar</a></div></div></article>
+      <div class="actions"><a class="btn btn--line btn--sm" href="{MAPS_DIR}" target="_blank" rel="noopener">Como chegar</a><a class="btn btn--line btn--sm" href="/contactos#localizacao">Ver o mapa</a></div></div></article>
     <article class="stage" id="pos-exame" data-reveal><div class="stage__n">7</div><div>
       <h2>Pós-exame</h2>
       <ul class="ticks ticks--lg">
@@ -674,7 +696,7 @@ contactos = phero(["Contactos"], "Contactos", "Atendemos com agendamento. Escolh
     <p class="note">Os pedidos feitos no site são enviados para o WhatsApp 951 165 810.</p>
     <h2 style="margin-top:44px">Morada</h2>
     <p class="lead">{ADDRESS}</p>
-    <div class="actions"><a class="btn btn--line" href="{MAPS}" target="_blank" rel="noopener">{I["pin"]} Abrir no Google Maps</a></div>
+    <div class="actions"><a class="btn btn--line" href="#localizacao">{I["pin"]} Ver no mapa</a></div>
   </div>
   <div class="form-card" data-reveal="right">
     <h2>Enviar mensagem</h2>
@@ -688,6 +710,9 @@ contactos = phero(["Contactos"], "Contactos", "Atendemos com agendamento. Escolh
     </form>
     {done_block("A equipa responde assim que possível.")}
   </div>
+</div></section>
+<section class="section section--paper" id="localizacao"><div class="wrap">
+  {map_block()}
 </div></section>'''
 
 # ================================================================= PRIVACIDADE
@@ -701,6 +726,8 @@ privacidade = phero(["Privacidade"], "Privacidade", "Como tratamos os dados que 
   <p>Pedimos que não escreva sintomas, diagnósticos ou resultados de exames nos formulários. Essa informação é tratada diretamente com a equipa, com a devida confidencialidade.</p>
   <h2>Imagens e vídeos</h2>
   <p>As fotografias e os vídeos das pessoas que aparecem neste site são publicados com a sua autorização.</p>
+  <h2>Mapa</h2>
+  <p>O mapa das páginas Início e Contactos é fornecido pelo Google Maps. Ao carregá-lo, o Google pode recolher dados de utilização segundo as suas próprias condições.</p>
   <h2>WhatsApp</h2>
   <p>As mensagens enviadas pelo WhatsApp estão sujeitas às condições desse serviço.</p>
   <h2>Os seus direitos</h2>

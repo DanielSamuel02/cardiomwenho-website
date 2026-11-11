@@ -9,7 +9,13 @@ SITE_URL = "https://cardiomwenho.vercel.app"
 WA_MAIN = "244951165810"
 PHONES = [("951 165 810", "244951165810"), ("939 126 610", "244939126610"), ("946 858 377", "244946858377")]
 ADDRESS = "São Pedro, Rua Ferreira Viana, Huambo, Angola"
-MAPS = "https://www.google.com/maps/search/?api=1&query=Rua+Ferreira+Viana%2C+S%C3%A3o+Pedro%2C+Huambo%2C+Angola"
+# Localização no Google Maps. Quando a Cardiomwenho tiver o Perfil da Empresa no Google
+# (ou coordenadas confirmadas), basta substituir MAP_QUERY pelo nome exato ou por "lat,lng".
+from urllib.parse import quote
+MAP_QUERY = "Cardiomwenho, Rua Ferreira Viana, São Pedro, Huambo, Angola"
+MAPS = "https://www.google.com/maps/search/?api=1&query=" + quote(MAP_QUERY)
+MAPS_DIR = "https://www.google.com/maps/dir/?api=1&destination=" + quote(MAP_QUERY)
+MAPS_EMBED = "https://www.google.com/maps?q=" + quote(MAP_QUERY) + "&hl=pt-PT&z=16&output=embed"
 
 AREAS = {
     "cardio": {"name": "Exames cardíacos", "cls": "c-cardio", "icon": "heart"},

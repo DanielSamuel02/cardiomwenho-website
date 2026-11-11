@@ -782,3 +782,19 @@ h1, h2, h3 { hyphens: manual; -webkit-hyphens: manual; overflow-wrap: break-word
   .summary b { font-size: 1.3rem; }
   .filters button { padding: 8px 14px; min-height: 42px; }
 }
+
+/* ---------- 24. Mapa ---------- */
+.map { position: relative; display: grid; grid-template-columns: 1fr 380px; border-radius: var(--r-lg); overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.map__frame { position: relative; min-height: 420px; background: var(--mist-2); }
+.map__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map__card { padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; justify-content: center; border-left: 4px solid var(--red); }
+.map__title { font-size: 1.6rem; }
+.map__addr { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; color: var(--navy); font-size: var(--t-md); line-height: 1.45; }
+.map__addr svg { width: 22px; height: 22px; color: var(--red); flex: none; margin-top: 2px; }
+.map__note { color: var(--muted); font-size: var(--t-sm); }
+.map .actions { margin-top: 6px; }
+@media (max-width: 900px) {
+  .map { grid-template-columns: 1fr; }
+  .map__frame { min-height: 0; aspect-ratio: 4 / 3; }
+  .map__card { border-left: 0; border-top: 4px solid var(--red); }
+}
