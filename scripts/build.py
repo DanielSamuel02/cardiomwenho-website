@@ -63,7 +63,20 @@ def pic(path, alt, w, h, eager=False, sizes=None, cls="", small=True):
     return (f'<picture><source type="image/webp" srcset="{srcset}"{s}>'
             f'<img src="{src}.jpg" alt="{E(alt)}" width="{w}" height="{h}"{load} decoding="async"{c}></picture>')
 
+def asset_version(rel):
+    """Hash curto do ficheiro, para forçar o navegador a carregar a versão nova após cada publicação."""
+    import hashlib
+    return hashlib.sha1((OUT / rel).read_bytes()).hexdigest()[:10]
+
+import re
+_BOUNDARY = re.compile(r"(</(?:span|b|small|strong|em|a|li|h[1-6]|p|div|button|label|legend|figcaption|summary|ul|ol|option|optgroup|details|figure|picture|article|nav|section|header|footer|fieldset|select|textarea)>)(?=<)")
+
+def separate(html):
+    """Garante espaço real entre elementos de texto adjacentes (não depende do CSS)."""
+    return _BOUNDARY.sub(r"\1\n", html)
+
 def page(path, title, desc, body, current=None, og="/assets/img/og.jpg", extra_head=""):
+    css_v, js_v = asset_version("assets/css/site.css"), asset_version("assets/js/site.js")
     nav = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == current else ""}>{t}</a>' for h, t in NAV)
     canon = SITE_URL + ("/" if path == "index" else "/" + path)
     return f'''<!doctype html>
@@ -87,7 +100,7 @@ def page(path, title, desc, body, current=None, og="/assets/img/og.jpg", extra_h
 <link rel="apple-touch-icon" href="/assets/img/marca.png">
 <link rel="preload" href="/assets/fonts/Poppins-Bold.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/assets/fonts/Poppins-Regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v={css_v}">
 <script>document.documentElement.classList.add("js")</script>
 {extra_head}
 </head>
@@ -151,7 +164,7 @@ def page(path, title, desc, body, current=None, og="/assets/img/og.jpg", extra_h
   </div>
 </div></footer>
 <a class="fab" href="#" data-wa="Olá, Cardiomwenho. Gostaria de mais informações." aria-label="Falar connosco pelo WhatsApp">{I["wa"]}<span>Fale connosco</span></a>
-<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/site.js?v={js_v}" defer></script>
 </body>
 </html>
 '''
@@ -242,7 +255,7 @@ LIGHTBOX = f'''<dialog class="lightbox" id="lightbox" aria-label="Vídeo">
 # ================================================================= INÍCIO
 rail_cards = "".join(ecard(x, i, reveal=False) for i, x in enumerate(EXAMS))
 journey_tabs = "".join(
-    f'<li><button role="tab" id="jt-{s["id"]}" aria-controls="jp-{s["id"]}" aria-selected="false" tabindex="-1"><span class="n">{i + 1}</span>{s["title"]}</button></li>'
+    f'<li><button role="tab" id="jt-{s["id"]}" aria-controls="jp-{s["id"]}" aria-selected="false" tabindex="-1"><span class="n">{i + 1}</span> <span class="t">{s["title"]}</span></button></li>'
     for i, s in enumerate(JOURNEY))
 journey_panels = "".join(
     f'''<div class="jpanel" role="tabpanel" id="jp-{s["id"]}" aria-labelledby="jt-{s["id"]}" hidden>
@@ -264,7 +277,7 @@ def index_groups():
             f'<li><a href="/exames/{x["slug"]}" data-img="/assets/img/exames/{x["img"]}{"-640" if x["img"] != "aptidao" else ""}.webp">'
             f'<span class="ix__name">{x["name"]}</span><span class="ix__go">{I["arrow"]}</span></a></li>'
             for x in EXAMS if x["area"] == key)
-        out.append(f'<div class="ix {a["cls"]}" data-reveal><h3 class="ix__head"><span class="ix__icon">{I[a["icon"]]}</span>{label}<small>{a["name"]}</small></h3><ul>{rows}</ul></div>')
+        out.append(f'<div class="ix {a["cls"]}" data-reveal><h3 class="ix__head"><span class="ix__icon">{I[a["icon"]]}</span> <span class="ix__label">{label}</span> <small>{a["name"]}</small></h3><ul>{rows}</ul></div>')
     return "".join(out)
 
 home = f'''
@@ -287,10 +300,10 @@ home = f'''
   <div class="monitor rise" style="--d:1s">
     <div class="monitor__sweep" aria-hidden="true"><svg viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="{MONITOR_D}"/></svg></div>
     <nav class="wrap monitor__links" aria-label="Atalhos">
-      <a href="/marcar"><small>Pelo WhatsApp</small>Marcar um exame</a>
-      <a href="/guia#preparacao"><small>Antes do exame</small>Como me preparar</a>
-      <a href="/empresas"><small>Saúde ocupacional</small>Exames para empresas</a>
-      <a href="/cursos"><small>Novas turmas</small>Cursos todos os meses</a>
+      <a href="/marcar"><small>Pelo WhatsApp</small> <span>Marcar um exame</span></a>
+      <a href="/guia#preparacao"><small>Antes do exame</small> <span>Como me preparar</span></a>
+      <a href="/empresas"><small>Saúde ocupacional</small> <span>Exames para empresas</span></a>
+      <a href="/cursos"><small>Novas turmas</small> <span>Cursos todos os meses</span></a>
     </nav>
   </div>
 </section>
@@ -412,7 +425,7 @@ def exam_page(x):
   <p class="crumbs" data-reveal><a href="/">Início</a> / <a href="/exames">Exames</a> / {x["short"]}</p>
   <div class="exam-hero" style="padding-top:0">
     <div>
-      <span class="pill" data-reveal>{I[a["icon"]]}{a["name"]}</span>
+      <span class="pill" data-reveal>{I[a["icon"]]} {a["name"]}</span>
       <h1 data-reveal style="--d:.05s">{x["name"]}</h1>
       <p class="lead" data-reveal style="--d:.1s">{x["summary"]}</p>
       <div class="actions" data-reveal style="--d:.15s"><a class="btn btn--red" href="{cta_href}">{cta_txt}</a><a class="btn btn--line" href="#preparacao">Como me preparar</a></div>
@@ -502,7 +515,7 @@ guia = phero(["Guia do doente"], "O seu exame, passo a passo",
 
 # ================================================================= MARCAR
 marcar = phero(["Marcar exame"], "Marcar exame", "Preencha o pedido e envie pelo WhatsApp. A equipa confirma a hora consigo.") + f'''
-<section class="section"><div class="wrap split split--top">
+<section class="section"><div class="wrap split split--top split--form">
   <div class="form-card" data-reveal>
     <h2>Pedido de marcação</h2>
     <p>A marcação só fica confirmada quando a equipa responder no WhatsApp.</p>
@@ -576,7 +589,7 @@ cursos = phero(["Cursos"], "Cursos de exames cardíacos e respiratórios",
     <li data-reveal style="--d:.18s">{I["book"]}<span>Material de apoio</span></li>
   </ul>
 </div></section>
-<section class="section section--mist" id="inscricao"><div class="wrap split split--top">
+<section class="section section--mist" id="inscricao"><div class="wrap split split--top split--form">
   <div class="form-card" data-reveal>
     <h2>Inscrição</h2>
     <p>Escolha os cursos. O valor é calculado automaticamente, segundo a tabela da Cardiomwenho.</p>
@@ -716,13 +729,13 @@ PAGES = [
 def main():
     (OUT / "exames").mkdir(parents=True, exist_ok=True)
     for slug, title, desc, body, cur, head in PAGES:
-        (OUT / f"{slug}.html").write_text(page(slug, title, desc, body, cur, extra_head=head), encoding="utf-8")
+        (OUT / f"{slug}.html").write_text(separate(page(slug, title, desc, body, cur, extra_head=head)), encoding="utf-8")
     for x in EXAMS:
         ld = (f'<script type="application/ld+json">{{"@context":"https://schema.org","@type":"MedicalTest","name":{json_str(x["name"])},'
               f'"description":{json_str(x["summary"])},"url":"{SITE_URL}/exames/{x["slug"]}"}}</script>')
-        (OUT / "exames" / f"{x['slug']}.html").write_text(
+        (OUT / "exames" / f"{x['slug']}.html").write_text(separate(
             page(f"exames/{x['slug']}", f"{x['name']} · Cardiomwenho", f"{x['summary']} Saiba como se preparar e marque pelo WhatsApp.",
-                 exam_page(x), "/exames", og=f"/assets/img/exames/{x['img']}.jpg", extra_head=ld), encoding="utf-8")
+                 exam_page(x), "/exames", og=f"/assets/img/exames/{x['img']}.jpg", extra_head=ld)), encoding="utf-8")
     urls = [""] + [p[0] for p in PAGES if p[0] not in ("index", "404", "privacidade")] + [f"exames/{x['slug']}" for x in EXAMS]
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{SITE_URL}/{u}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")

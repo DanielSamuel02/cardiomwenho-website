@@ -89,7 +89,7 @@
   }
   $all("[data-months]").forEach(function (ul) {
     ul.innerHTML = nextMonths(Number(ul.getAttribute("data-months")) || 6).map(function (x, i) {
-      return "<li><b>" + x.m.charAt(0).toUpperCase() + x.m.slice(1) + "</b><span>" + (i === 0 ? "Turma deste mês" : x.y) + "</span></li>";
+      return "<li><b>" + x.m.charAt(0).toUpperCase() + x.m.slice(1) + "</b> <span>" + (i === 0 ? "Turma deste mês" : x.y) + "</span></li>";
     }).join("");
   });
   $all("[data-months-select]").forEach(function (sel) {

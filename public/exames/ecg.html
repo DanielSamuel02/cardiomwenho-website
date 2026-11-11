@@ -19,7 +19,7 @@
 <link rel="apple-touch-icon" href="/assets/img/marca.png">
 <link rel="preload" href="/assets/fonts/Poppins-Bold.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/assets/fonts/Poppins-Regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v=97a23c9a7b">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalTest","name":"Eletrocardiograma (ECG)","description":"Regista a atividade elétrica do coração em repouso. É rápido e indolor.","url":"https://cardiomwenho.vercel.app/exames/ecg"}</script>
 </head>
@@ -29,54 +29,97 @@
 <div class="topbar"><div class="wrap">
   <span>Atendemos com agendamento, em São Pedro, Huambo</span>
   <a href="#" data-wa="Olá, Cardiomwenho. Gostaria de fazer uma marcação."><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 2.1.9 3 1 4 .8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.4z"/></svg> WhatsApp 951 165 810</a>
-</div></div>
+</div>
+</div>
 <header class="header"><div class="wrap">
   <a class="brand" href="/" aria-label="Cardiomwenho, página inicial">
     <img src="/assets/img/marca.png" alt="" width="50" height="38">
-    <span><b>Cardiomwenho</b><small>Saúde Cardiopulmonar e Ocupacional</small></span>
+    <span><b>Cardiomwenho</b>
+<small>Saúde Cardiopulmonar e Ocupacional</small>
+</span>
   </a>
   <button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <nav class="nav" id="nav" aria-label="Principal">
     <button class="menu-btn nav-close" type="button" aria-label="Fechar menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <a href="/exames" aria-current="page">Exames</a><a href="/guia">Guia do doente</a><a href="/empresas">Empresas</a><a href="/cursos">Cursos</a><a href="/mentorias">Mentorias</a><a href="/contactos">Contactos</a>
+    <a href="/exames" aria-current="page">Exames</a>
+<a href="/guia">Guia do doente</a>
+<a href="/empresas">Empresas</a>
+<a href="/cursos">Cursos</a>
+<a href="/mentorias">Mentorias</a>
+<a href="/contactos">Contactos</a>
     <a class="btn btn--red" href="/marcar">Marcar exame</a>
   </nav>
-</div></header>
+</div>
+</header>
 <div class="scrim" aria-hidden="true"></div>
 <main id="conteudo">
 <section class="phero section--paper c-cardio"><div class="wrap">
   <p class="crumbs" data-reveal><a href="/">Início</a> / <a href="/exames">Exames</a> / ECG</p>
   <div class="exam-hero" style="padding-top:0">
     <div>
-      <span class="pill" data-reveal><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 27S4 19.5 4 11.5A6.5 6.5 0 0 1 16 8a6.5 6.5 0 0 1 12 3.5C28 19.5 16 27 16 27z"/><path d="M7 15h5l2-4 3 8 2-4h6"/></svg>Exames cardíacos</span>
+      <span class="pill" data-reveal><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 27S4 19.5 4 11.5A6.5 6.5 0 0 1 16 8a6.5 6.5 0 0 1 12 3.5C28 19.5 16 27 16 27z"/><path d="M7 15h5l2-4 3 8 2-4h6"/></svg> Exames cardíacos</span>
       <h1 data-reveal style="--d:.05s">Eletrocardiograma (ECG)</h1>
       <p class="lead" data-reveal style="--d:.1s">Regista a atividade elétrica do coração em repouso. É rápido e indolor.</p>
-      <div class="actions" data-reveal style="--d:.15s"><a class="btn btn--red" href="/marcar?exame=ecg">Marcar este exame</a><a class="btn btn--line" href="#preparacao">Como me preparar</a></div>
+      <div class="actions" data-reveal style="--d:.15s"><a class="btn btn--red" href="/marcar?exame=ecg">Marcar este exame</a>
+<a class="btn btn--line" href="#preparacao">Como me preparar</a>
+</div>
     </div>
-    <div class="exam-hero__img" data-reveal="zoom"><picture><source type="image/webp" srcset="/assets/img/exames/ecg-640.webp 640w, /assets/img/exames/ecg.webp 1200w" sizes="(max-width: 860px) 92vw, 560px"><img src="/assets/img/exames/ecg.jpg" alt="Eletrocardiograma em repouso realizado na Cardiomwenho" width="1200" height="900" fetchpriority="high" decoding="async"></picture></div>
+    <div class="exam-hero__img" data-reveal="zoom"><picture><source type="image/webp" srcset="/assets/img/exames/ecg-640.webp 640w, /assets/img/exames/ecg.webp 1200w" sizes="(max-width: 860px) 92vw, 560px"><img src="/assets/img/exames/ecg.jpg" alt="Eletrocardiograma em repouso realizado na Cardiomwenho" width="1200" height="900" fetchpriority="high" decoding="async"></picture>
+</div>
   </div>
-</div></section>
+</div>
+</section>
 <section class="section c-cardio"><div class="wrap exam-layout">
   <div>
-    <div class="block" data-reveal><h2><span class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="14" r="9"/><path d="M21 21l7 7"/></svg></span>O que é</h2><p>O eletrocardiograma regista os sinais elétricos do coração através de elétrodos colocados no peito, nos braços e nas pernas. Mostra o ritmo e a frequência cardíaca e pode revelar alterações que merecem acompanhamento.</p></div>
+    <div class="block" data-reveal><h2><span class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="14" r="9"/><path d="M21 21l7 7"/></svg></span>O que é</h2>
+<p>O eletrocardiograma regista os sinais elétricos do coração através de elétrodos colocados no peito, nos braços e nas pernas. Mostra o ritmo e a frequência cardíaca e pode revelar alterações que merecem acompanhamento.</p>
+</div>
     <div class="block" data-reveal><h2><span class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h11l7 7v19H8z"/><path d="M19 3v7h7M12 17h10M12 22h10"/></svg></span>Quando pode ser pedido</h2>
-      <ul class="ticks"><li>Avaliações de rotina e check-ups</li><li>Palpitações, cansaço ou tonturas</li><li>Antes de algumas cirurgias ou tratamentos</li><li>Avaliações médicas ocupacionais</li></ul>
-      <p>A indicação para o exame é sempre do seu médico ou, nas avaliações ocupacionais, da empresa.</p></div>
+      <ul class="ticks"><li>Avaliações de rotina e check-ups</li>
+<li>Palpitações, cansaço ou tonturas</li>
+<li>Antes de algumas cirurgias ou tratamentos</li>
+<li>Avaliações médicas ocupacionais</li>
+</ul>
+      <p>A indicação para o exame é sempre do seu médico ou, nas avaliações ocupacionais, da empresa.</p>
+</div>
     <div class="block" id="preparacao" data-reveal><h2><span class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="5" width="18" height="24" rx="3"/><path d="M12 5V3h8v2M12 13h8M12 18h8M12 23h5"/></svg></span>Como se preparar</h2>
-      <ul class="ticks"><li>Não precisa de jejum.</li><li>Evite cremes ou óleos no peito no dia do exame.</li><li>Use roupa que permita descobrir facilmente o peito.</li><li>Traga exames anteriores e a lista dos medicamentos que toma.</li></ul>
-      <p>Estas orientações são gerais. Na confirmação da marcação, a equipa indica o que se aplica ao seu caso.</p></div>
+      <ul class="ticks"><li>Não precisa de jejum.</li>
+<li>Evite cremes ou óleos no peito no dia do exame.</li>
+<li>Use roupa que permita descobrir facilmente o peito.</li>
+<li>Traga exames anteriores e a lista dos medicamentos que toma.</li>
+</ul>
+      <p>Estas orientações são gerais. Na confirmação da marcação, a equipa indica o que se aplica ao seu caso.</p>
+</div>
     <div class="block" data-reveal><h2><span class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 28V5h14v23M3 28h26M17 16h.01M21 9h4v19"/></svg></span>No dia do exame</h2>
-      <ul class="ticks"><li>Fica deitado, em repouso, enquanto os elétrodos são colocados.</li><li>O registo dura poucos minutos e não provoca dor.</li><li>Deve manter-se quieto e respirar normalmente durante o registo.</li></ul></div>
-    <div class="block" data-reveal><h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Depois do exame</h2><p>Pode retomar de imediato as suas atividades. A equipa indica como e quando recebe o resultado, que deve mostrar ao médico que pediu o exame.</p></div>
-    <div class="alert" data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg><p><strong>Em caso de dor no peito forte, falta de ar súbita ou desmaio, não espere pela marcação:</strong> procure de imediato um serviço de urgência.</p></div>
+      <ul class="ticks"><li>Fica deitado, em repouso, enquanto os elétrodos são colocados.</li>
+<li>O registo dura poucos minutos e não provoca dor.</li>
+<li>Deve manter-se quieto e respirar normalmente durante o registo.</li>
+</ul>
+</div>
+    <div class="block" data-reveal><h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Depois do exame</h2>
+<p>Pode retomar de imediato as suas atividades. A equipa indica como e quando recebe o resultado, que deve mostrar ao médico que pediu o exame.</p>
+</div>
+    <div class="alert" data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg><p><strong>Em caso de dor no peito forte, falta de ar súbita ou desmaio, não espere pela marcação:</strong> procure de imediato um serviço de urgência.</p>
+</div>
   </div>
   <aside class="exam-aside">
-    <div class="aside-card"><h3>Marcar este exame</h3><p>Envie o pedido pelo WhatsApp. A equipa confirma a hora consigo.</p>
+    <div class="aside-card"><h3>Marcar este exame</h3>
+<p>Envie o pedido pelo WhatsApp. A equipa confirma a hora consigo.</p>
       <a class="btn btn--red" href="/marcar?exame=ecg">Marcar este exame</a>
-      <a class="btn btn--ghost" href="#" data-wa="Olá, Cardiomwenho. Tenho uma dúvida sobre o exame: Eletrocardiograma (ECG)."><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 2.1.9 3 1 4 .8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.4z"/></svg> Tirar uma dúvida</a></div>
-    <div class="aside-links"><h4>Outros exames desta área</h4><ul><li><a href="/exames/holter">Holter (24h)</a></li><li><a href="/exames/mapa">MAPA (Monitorização Ambulatorial da Pressão Arterial)</a></li><li><a href="/exames/ergometria">Ergometria (Teste de esforço)</a></li></ul></div>
+      <a class="btn btn--ghost" href="#" data-wa="Olá, Cardiomwenho. Tenho uma dúvida sobre o exame: Eletrocardiograma (ECG)."><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 2.1.9 3 1 4 .8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.4z"/></svg> Tirar uma dúvida</a>
+</div>
+    <div class="aside-links"><h4>Outros exames desta área</h4>
+<ul><li><a href="/exames/holter">Holter (24h)</a>
+</li>
+<li><a href="/exames/mapa">MAPA (Monitorização Ambulatorial da Pressão Arterial)</a>
+</li>
+<li><a href="/exames/ergometria">Ergometria (Teste de esforço)</a>
+</li>
+</ul>
+</div>
   </aside>
-</div></section>
+</div>
+</section>
 </main>
 <footer class="footer"><div class="wrap">
   <div class="about">
@@ -87,34 +130,52 @@
   <div>
     <h4>Exames</h4>
     <ul>
-      <li><a href="/exames?area=cardio">Exames cardíacos</a></li>
-      <li><a href="/exames?area=resp">Exames pulmonares</a></li>
-      <li><a href="/empresas">Saúde ocupacional</a></li>
-      <li><a href="/guia">Guia do doente</a></li>
+      <li><a href="/exames?area=cardio">Exames cardíacos</a>
+</li>
+      <li><a href="/exames?area=resp">Exames pulmonares</a>
+</li>
+      <li><a href="/empresas">Saúde ocupacional</a>
+</li>
+      <li><a href="/guia">Guia do doente</a>
+</li>
     </ul>
   </div>
   <div>
     <h4>Pedidos</h4>
     <ul>
-      <li><a href="/marcar">Marcar exame</a></li>
-      <li><a href="/empresas#pedido">Pedido para empresas</a></li>
-      <li><a href="/cursos#inscricao">Inscrição em cursos</a></li>
-      <li><a href="/mentorias#pedido">Pedido de mentoria</a></li>
+      <li><a href="/marcar">Marcar exame</a>
+</li>
+      <li><a href="/empresas#pedido">Pedido para empresas</a>
+</li>
+      <li><a href="/cursos#inscricao">Inscrição em cursos</a>
+</li>
+      <li><a href="/mentorias#pedido">Pedido de mentoria</a>
+</li>
     </ul>
   </div>
   <div>
     <h4>Contactos</h4>
     <ul>
-      <li><a href="tel:+244951165810">951 165 810</a></li><li><a href="tel:+244939126610">939 126 610</a></li><li><a href="tel:+244946858377">946 858 377</a></li>
-      <li><a href="https://www.google.com/maps/search/?api=1&query=Rua+Ferreira+Viana%2C+S%C3%A3o+Pedro%2C+Huambo%2C+Angola" target="_blank" rel="noopener">São Pedro, Rua Ferreira Viana, Huambo, Angola</a></li>
+      <li><a href="tel:+244951165810">951 165 810</a>
+</li>
+<li><a href="tel:+244939126610">939 126 610</a>
+</li>
+<li><a href="tel:+244946858377">946 858 377</a>
+</li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=Rua+Ferreira+Viana%2C+S%C3%A3o+Pedro%2C+Huambo%2C+Angola" target="_blank" rel="noopener">São Pedro, Rua Ferreira Viana, Huambo, Angola</a>
+</li>
     </ul>
   </div>
   <div class="base">
-    <span>© <span data-year>2026</span> Cardiomwenho. Prevenção hoje, mais vida amanhã. <a href="/privacidade">Privacidade</a></span>
-    <span>Desenvolvido por <a href="https://healthlink-website.vercel.app" target="_blank" rel="noopener">HealthLink</a></span>
+    <span>© <span data-year>2026</span> Cardiomwenho. Prevenção hoje, mais vida amanhã. <a href="/privacidade">Privacidade</a>
+</span>
+    <span>Desenvolvido por <a href="https://healthlink-website.vercel.app" target="_blank" rel="noopener">HealthLink</a>
+</span>
   </div>
-</div></footer>
-<a class="fab" href="#" data-wa="Olá, Cardiomwenho. Gostaria de mais informações." aria-label="Falar connosco pelo WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 2.1.9 3 1 4 .8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.4z"/></svg><span>Fale connosco</span></a>
-<script src="/assets/js/site.js" defer></script>
+</div>
+</footer>
+<a class="fab" href="#" data-wa="Olá, Cardiomwenho. Gostaria de mais informações." aria-label="Falar connosco pelo WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 2.1.9 3 1 4 .8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.4z"/></svg><span>Fale connosco</span>
+</a>
+<script src="/assets/js/site.js?v=fdb81de413" defer></script>
 </body>
 </html>
