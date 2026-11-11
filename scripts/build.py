@@ -158,7 +158,7 @@ def page(path, title, desc, body, current=None, og="/assets/img/og.jpg", extra_h
 
 def phero(crumbs, h1, lead):
     cr = " / ".join([f'<a href="/">Início</a>'] + crumbs)
-    return f'''<section class="phero"><div class="wrap">
+    return f'''<section class="phero section--paper"><div class="wrap">
   <p class="crumbs" data-reveal>{cr}</p>
   <h1 data-reveal style="--d:.05s">{h1}</h1>
   <p class="lead" data-reveal style="--d:.12s">{lead}</p>
@@ -251,82 +251,71 @@ journey_panels = "".join(
   <div class="actions"><a class="btn btn--red btn--sm" href="{s["cta"][1]}">{s["cta"][0]}</a>{'<button type="button" class="btn btn--line btn--sm" data-journey-next>Etapa seguinte</button>' if i < len(JOURNEY) - 1 else ''}</div></div>
 </div>''' for i, s in enumerate(JOURNEY))
 
+
+# traçado do monitor (repete duas vezes para o deslizamento contínuo)
+_beat = "h120 q10 -9 20 0 h18 l6 5 l10 -34 l12 46 l8 -17 h40 q16 -15 32 0 h134"
+MONITOR_D = "M0 34 " + " ".join([_beat] * 8)
+
+def index_groups():
+    out = []
+    for key, label in (("cardio", "Coração"), ("resp", "Pulmões"), ("ocup", "Trabalho")):
+        a = AREAS[key]
+        rows = "".join(
+            f'<li><a href="/exames/{x["slug"]}" data-img="/assets/img/exames/{x["img"]}{"-640" if x["img"] != "aptidao" else ""}.webp">'
+            f'<span class="ix__name">{x["name"]}</span><span class="ix__go">{I["arrow"]}</span></a></li>'
+            for x in EXAMS if x["area"] == key)
+        out.append(f'<div class="ix {a["cls"]}" data-reveal><h3 class="ix__head"><span class="ix__icon">{I[a["icon"]]}</span>{label}<small>{a["name"]}</small></h3><ul>{rows}</ul></div>')
+    return "".join(out)
+
 home = f'''
 <section class="hero">
-  <div class="wrap hero__grid">
-    <div>
-      <p class="hero__tag rise" style="--d:.05s"><i></i>Serviços de Saúde Cardiopulmonar e Ocupacional, no Huambo</p>
-      <h1><span class="ln c-red"><span style="--d:.15s">Cuide do seu coração.</span></span><span class="ln c-blue"><span style="--d:.3s">Respire melhor.</span></span><span class="ln c-green"><span style="--d:.45s">Trabalhe com segurança.</span></span></h1>
-      <p class="lead rise" style="--d:.7s">Exames e avaliações completas para o seu bem-estar e qualidade de vida, com equipamentos de última geração e uma equipa médica especializada.</p>
-      <div class="actions rise" style="--d:.85s">
-        <a class="btn btn--red" href="/marcar">Marcar exame</a>
-        <a class="btn btn--line" href="/guia">Como funciona</a>
-      </div>
-      <ul class="trust rise" style="--d:1s">
-        <li>{I["tick"]}Particulares e empresas</li><li>{I["tick"]}Atendimento com agendamento</li><li>{I["tick"]}Marcação pelo WhatsApp</li>
-      </ul>
-    </div>
-    <div class="hero__media rise" style="--d:.35s">
-      <div class="hero__frame">
-        <video autoplay muted loop playsinline preload="metadata" poster="/assets/video/teste-esforco.jpg" aria-label="Teste de esforço na Cardiomwenho, com a equipa a acompanhar o paciente">
-          <source src="/assets/video/hero-loop.mp4" type="video/mp4">
-        </video>
-        <button class="vid-toggle" type="button" data-vid-toggle aria-label="Pausar vídeo"></button>
-        <span class="hero__cap"><i></i>Teste de esforço na Cardiomwenho</span>
-      </div>
-      <div class="float-card float-card--a">{I["wa"]}<div><b>Marque pelo WhatsApp</b><span>A equipa confirma a hora consigo.</span></div></div>
-      <div class="float-card float-card--b">{I["heart"]}<div><b>Monitorização em tempo real</b><span>Equipa ao seu lado em cada exame.</span></div></div>
+  <picture class="hero__bg">
+    <source media="(max-width: 700px)" type="image/webp" srcset="/assets/img/hero-mobile.webp">
+    <source media="(max-width: 700px)" srcset="/assets/img/hero-mobile.jpg">
+    <source type="image/webp" srcset="/assets/img/hero-ergometria-960.webp 960w, /assets/img/hero-ergometria.webp 1600w" sizes="100vw">
+    <img src="/assets/img/hero-ergometria.jpg" alt="Equipa da Cardiomwenho a acompanhar um teste de esforço na sala de ergometria" width="1600" height="900" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="wrap hero__inner">
+    <p class="hero__kicker rise" style="--d:.05s">Saúde cardiopulmonar e ocupacional no Huambo</p>
+    <h1><span class="ln c-red"><span style="--d:.15s">Cuide do seu coração.</span></span><span class="ln c-blue"><span style="--d:.3s">Respire melhor.</span></span><span class="ln c-green"><span style="--d:.45s">Trabalhe com segurança.</span></span></h1>
+    <p class="hero__lead rise" style="--d:.7s">Exames cardíacos, pulmonares e de saúde ocupacional para particulares e empresas. Com agendamento, em São Pedro.</p>
+    <div class="actions rise" style="--d:.85s">
+      <a class="btn btn--red" href="/marcar">Marcar exame</a>
+      <a class="btn btn--ghost" href="/guia">Como funciona</a>
     </div>
   </div>
-  <div class="wrap hero__line">{trace()}</div>
+  <div class="monitor rise" style="--d:1s">
+    <div class="monitor__sweep" aria-hidden="true"><svg viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="{MONITOR_D}"/></svg></div>
+    <nav class="wrap monitor__links" aria-label="Atalhos">
+      <a href="/marcar"><small>Pelo WhatsApp</small>Marcar um exame</a>
+      <a href="/guia#preparacao"><small>Antes do exame</small>Como me preparar</a>
+      <a href="/empresas"><small>Saúde ocupacional</small>Exames para empresas</a>
+      <a href="/cursos"><small>Novas turmas</small>Cursos todos os meses</a>
+    </nav>
+  </div>
 </section>
 
-<section class="section--tight" style="background:var(--mist)"><div class="wrap">
-  <nav class="quick" aria-label="Atalhos">
-    <a href="/marcar" data-reveal style="--c:var(--red)">{I["cal"]}<b>Marcar um exame</b><span>Escolha o exame e envie o pedido pelo WhatsApp.</span></a>
-    <a href="/guia#preparacao" data-reveal style="--c:var(--blue);--d:.06s">{I["clipboard"]}<b>Como me preparar</b><span>O que trazer e o que evitar antes do exame.</span></a>
-    <a href="/empresas" data-reveal style="--c:var(--green);--d:.12s">{I["building"]}<b>Exames para empresas</b><span>Admissionais, periódicos e outros.</span></a>
-    <a href="/cursos" data-reveal style="--c:var(--navy);--d:.18s">{I["cert"]}<b>Cursos e mentorias</b><span>Formação em exames cardíacos e respiratórios.</span></a>
-  </nav>
+<section class="section section--paper" id="areas"><div class="wrap index">
+  <div class="index__intro" data-reveal="left">
+    <h2>O que fazemos</h2>
+    <p class="lead">Exames e avaliações completas para o seu bem-estar e qualidade de vida, com equipamentos de última geração e uma equipa médica especializada.</p>
+    <p class="index__hint">Escolha um exame para saber para que serve, como se preparar e marcar.</p>
+    <div class="actions"><a class="btn btn--navy" href="/exames">Ver todos os exames</a></div>
+  </div>
+  <div class="index__list" data-preview>
+    {index_groups()}
+  </div>
+  <figure class="preview" aria-hidden="true"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="320" height="240"></figure>
 </div></section>
 
-<section class="section" id="areas"><div class="wrap">
-  <div class="head" data-reveal><h2>Três áreas, um só cuidado</h2>
-  <p class="lead">Do coração aos pulmões e à saúde no trabalho, fazemos os exames no mesmo lugar.</p></div>
-  <div class="areas">
-    <article class="area c-cardio" data-reveal>
-      <div class="area__icon">{I["heart"]}</div><h3>Exames cardíacos</h3>
-      <p>Para conhecer o seu coração, em repouso e em movimento.</p>
-      <ul class="ticks"><li>Eletrocardiograma (ECG)</li><li>Holter (24h)</li><li>MAPA (Monitorização Ambulatorial da Pressão Arterial)</li><li>Ergometria (Teste de esforço)</li></ul>
-      <a class="textlink" href="/exames?area=cardio">Ver exames cardíacos</a>
-    </article>
-    <article class="area c-resp" data-reveal style="--d:.08s">
-      <div class="area__icon">{I["lungs"]}</div><h3>Exames pulmonares</h3>
-      <p>Para acompanhar a saúde dos seus pulmões.</p>
-      <ul class="ticks"><li>Espirometria</li><li>Avaliação funcional respiratória</li><li>Acompanhamento de condições respiratórias</li></ul>
-      <a class="textlink" href="/exames?area=resp">Ver exames pulmonares</a>
-    </article>
-    <article class="area c-ocup" data-reveal style="--d:.16s">
-      <div class="area__icon">{I["work"]}</div><h3>Saúde ocupacional</h3>
-      <p>Porque a saúde também vai connosco para o trabalho.</p>
-      <ul class="ticks"><li>Avaliações médicas ocupacionais</li><li>Exames admissionais e periódicos</li><li>Exames de retorno ao trabalho e de mudança de função</li><li>Avaliação da aptidão para determinadas atividades profissionais</li></ul>
-      <a class="textlink" href="/empresas">Ver serviços para empresas</a>
-    </article>
-  </div>
-</div></section>
-
-<section class="section section--mist" data-rail><div class="wrap">
-  <div class="head head--row" data-reveal>
-    <div><h2>Os nossos exames</h2><p class="lead">Veja para que serve cada exame e como se preparar antes de marcar.</p></div>
-    <div class="rail-ctrl"><button type="button" data-dir="-1" aria-label="Exames anteriores">{I["left"]}</button><button type="button" data-dir="1" aria-label="Exames seguintes">{I["right"]}</button></div>
-  </div>
-  <div class="rail" tabindex="0" aria-label="Lista de exames">{rail_cards}</div>
-  <div class="actions"><a class="btn btn--navy" href="/exames">Ver todos os exames</a></div>
-</div></section>
+<section class="team">
+  {pic("formacao-grupo", "Equipa e formandos da Cardiomwenho numa sessão de formação", 1600, 900, sizes="100vw")}
+  <div class="team__cap"><div class="wrap"><p data-reveal>Equipa médica especializada, a atender particulares e empresas no Huambo.</p></div></div>
+</section>
 
 <section class="section"><div class="wrap">
   <div class="head" data-reveal><h2>O seu exame, do primeiro contacto ao resultado</h2>
-  <p class="lead">Sete etapas simples. Em cada uma, sabe exatamente o que fazer a seguir.</p></div>
+  <p class="lead">Sete etapas. Em cada uma sabe o que fazer a seguir.</p></div>
   <div class="journey" data-journey>
     <ol class="jsteps" role="tablist" aria-label="Etapas da jornada do doente" aria-orientation="vertical" data-reveal="left"><span class="fill" aria-hidden="true"></span>{journey_tabs}</ol>
     <div data-reveal="right">{journey_panels}</div>
@@ -337,20 +326,21 @@ home = f'''
   <div data-reveal="left">
     <h2>Cursos de exames cardíacos e respiratórios</h2>
     <p class="lead">Capacite-se com quem tem experiência e faça a diferença na sua carreira. Formação teórica e prática, com certificado de participação.</p>
-    <ul class="chips"><li>Eletrocardiograma (ECG)</li><li>Holter</li><li>MAPA</li><li>Ergometria</li><li>Espirometria</li></ul>
-    <div class="price-line"><strong>20 000 Kz</strong><span>por curso, com valores especiais para quem fizer dois ou três cursos. Início em novembro.</span></div>
+    <p class="months-label">Novas turmas todos os meses</p>
+    <ul class="months" data-months="6" aria-label="Próximas turmas"></ul>
+    <div class="price-line"><strong>20 000 Kz</strong><span>por curso, com valores especiais para quem fizer dois ou três cursos.</span></div>
     <div class="actions"><a class="btn btn--white" href="/cursos">Ver cursos e inscrever-me</a><a class="btn btn--ghost" href="/mentorias">Mentorias académicas</a></div>
   </div>
-  <figure data-reveal="zoom">{pic("formacao-grupo", "Participantes e formadores numa sessão de formação da Cardiomwenho", 1600, 900, sizes="(max-width: 880px) 92vw, 560px")}<figcaption>Sessão de formação na Cardiomwenho.</figcaption></figure>
+  <figure data-reveal="zoom" class="band__photo">{pic("ecg-profissional", "Profissional da Cardiomwenho a realizar um eletrocardiograma", 1000, 1250, sizes="(max-width: 880px) 92vw, 480px")}<figcaption>Os cursos decorrem na Cardiomwenho, com os equipamentos usados no dia a dia.</figcaption></figure>
 </div></section>
 
 <section class="section"><div class="wrap">
-  <div class="head" data-reveal><h2>Por dentro da Cardiomwenho</h2>
-  <p class="lead">Veja como trabalhamos, com a autorização das pessoas filmadas.</p></div>
+  <div class="head head--row" data-reveal><div><h2>Por dentro da Cardiomwenho</h2>
+  <p class="lead">Imagens reais dos nossos exames, publicadas com a autorização das pessoas filmadas.</p></div></div>
   <div class="vgrid">{video_cards()}</div>
 </div></section>
 
-<section class="section section--mist"><div class="wrap">
+<section class="section section--paper"><div class="wrap">
   <div class="head" data-reveal><h2>Visita institucional</h2>
   <p class="lead">Momentos da visita à Cardiomwenho registados pelo Gabinete da Juventude e Desportos do Huambo.</p></div>
   <div class="gallery">
@@ -358,39 +348,27 @@ home = f'''
     <figure data-reveal="zoom" style="--d:.06s">{pic("visita/visita-2", "Visitantes a percorrer as instalações da Cardiomwenho", 1080, 720, small=False)}</figure>
     <figure data-reveal="zoom" style="--d:.12s">{pic("visita/visita-3", "Conversa num gabinete da Cardiomwenho durante a visita", 1080, 720, small=False)}</figure>
     <figure data-reveal="zoom" style="--d:.18s">{pic("visita/visita-1", "Visita à sala de exames da Cardiomwenho", 1080, 720, small=False)}</figure>
-    <figure data-reveal="zoom" style="--d:.24s">{pic("formacao-grupo", "Sessão de formação na Cardiomwenho", 1600, 900, sizes="320px")}</figure>
+    <figure data-reveal="zoom" style="--d:.24s">{pic("exames/espirometria", "Espirometria na Cardiomwenho", 1200, 900, sizes="320px")}</figure>
   </div>
-  <p class="gallery-cap">Fotografias: Gabinete da Juventude e Desportos, huambo.gov.ao.</p>
+  <p class="gallery-cap">Fotografias da visita: Gabinete da Juventude e Desportos, huambo.gov.ao.</p>
 </div></section>
 
-<section class="section"><div class="wrap">
-  <div class="duo">
-    <div class="panel panel--green c-ocup" data-reveal>
-      <span class="panel__ico">{I["building"]}</span>
-      <h3>Para empresas</h3>
-      <p>Exames admissionais, periódicos, de retorno ao trabalho e de mudança de função para as suas equipas. Peça uma proposta com o número de colaboradores.</p>
-      <div class="actions"><a class="btn btn--navy" href="/empresas#pedido">Pedir proposta</a></div>
-    </div>
-    <div class="panel panel--blue c-resp" data-reveal style="--d:.08s">
-      <span class="panel__ico">{I["mentor"]}</span>
-      <h3>Mentorias académicas</h3>
-      <p>Para estudantes e recém-formados da área da saúde que precisam de orientação em exames cardiopulmonares ou no trabalho académico.</p>
-      <div class="actions"><a class="btn btn--navy" href="/mentorias">Pedir mentoria</a></div>
-    </div>
+<section class="section"><div class="wrap two">
+  <div data-reveal>
+    <p class="two__k c-ocup">Para empresas</p>
+    <h3>Exames admissionais, periódicos, de retorno ao trabalho e de mudança de função para as suas equipas.</h3>
+    <a class="textlink c-ocup" href="/empresas#pedido">Pedir proposta para a empresa</a>
   </div>
-  <ul class="qualities" style="margin-top:64px">
-    <li data-reveal>{I["shield"]}Equipamentos de última geração</li>
-    <li data-reveal style="--d:.05s">{I["team"]}Equipa médica especializada</li>
-    <li data-reveal style="--d:.1s">{I["clock"]}Atendimento rápido e seguro</li>
-    <li data-reveal style="--d:.15s">{I["building"]}Atendimento para particulares e empresas</li>
-    <li data-reveal style="--d:.2s">{I["care"]}Mais saúde para o seu presente e futuro</li>
-  </ul>
+  <div data-reveal style="--d:.08s">
+    <p class="two__k c-resp">Para estudantes</p>
+    <h3>Mentorias académicas para estudantes e recém-formados da área da saúde.</h3>
+    <a class="textlink c-resp" href="/mentorias">Pedir mentoria</a>
+  </div>
 </div></section>
 
 <section class="section section--navy"><div class="wrap contact">
   <div data-reveal="left">
-    <h2>Fale connosco</h2>
-    <p class="slogan">A sua saúde é a nossa prioridade.</p>
+    <h2>A sua saúde é a nossa prioridade.</h2>
     <ul class="phones">{"".join(f'<li><a href="tel:+{n}">{I["phone"]}{p}</a></li>' for p, n in PHONES)}</ul>
     <div class="addr">{I["pin"]}<div>{ADDRESS}<br><a href="{MAPS}" target="_blank" rel="noopener" style="color:#fff">Abrir no Google Maps</a></div></div>
   </div>
@@ -430,7 +408,7 @@ def exam_page(x):
     cta_href = "/empresas#pedido" if ocup else f"/marcar?exame={x['slug']}"
     cta_txt = "Pedir para a empresa" if ocup else "Marcar este exame"
     small = x["img"] != "aptidao"
-    body = f'''<section class="phero {a["cls"]}"><div class="wrap">
+    body = f'''<section class="phero section--paper {a["cls"]}"><div class="wrap">
   <p class="crumbs" data-reveal><a href="/">Início</a> / <a href="/exames">Exames</a> / {x["short"]}</p>
   <div class="exam-hero" style="padding-top:0">
     <div>
@@ -589,7 +567,7 @@ course_boxes = "".join(
 <span class="box"><small>{"Exames cardíacos" if a == "cardio" else "Exames respiratórios"}</small><b>{n}</b><span>{d}</span></span>
 <span class="check">{I["check"]}</span></label>''' for v, a, n, d in COURSES)
 cursos = phero(["Cursos"], "Cursos de exames cardíacos e respiratórios",
-               "Capacite-se com quem tem experiência e faça a diferença na sua carreira. Início dos cursos em novembro.") + f'''
+               "Capacite-se com quem tem experiência e faça a diferença na sua carreira. Há novas turmas todos os meses.") + f'''
 <section class="section--tight"><div class="wrap">
   <ul class="perks">
     <li data-reveal>{I["board"]}<span>Formação teórica e prática</span></li>
@@ -609,6 +587,7 @@ cursos = phero(["Cursos"], "Cursos de exames cardíacos e respiratórios",
       </fieldset>
       {f_text("nome", "Nome completo", auto="name")}
       {f_text("telefone", "Telefone / WhatsApp", kind="tel", auto="tel", ph="9XX XXX XXX")}
+      <div class="field"><label for="f-mes">Mês pretendido</label><select id="f-mes" name="mes" required data-label="Mês pretendido" data-months-select="6" aria-describedby="e-mes"><option value="">Escolha</option></select><span class="err" id="e-mes"></span></div>
       {f_select("perfil", "Situação", ["Estudante da área da saúde", "Profissional de saúde", "Outra"])}
       {f_text("inst", "Instituição ou local de trabalho", req=False, auto="organization")}
       {consent()}
@@ -624,7 +603,9 @@ cursos = phero(["Cursos"], "Cursos de exames cardíacos e respiratórios",
       <li data-n="3"><b>10 mil</b><span>por curso, para quem fizer três cursos</span></li>
     </ul>
     <p class="note">Valores em kwanzas. Para quatro ou mais cursos, a equipa confirma o valor.</p>
-    <figure class="poster" style="margin-top:28px">{pic("cartaz-cursos", "Cartaz dos cursos de exames cardíacos e respiratórios da Cardiomwenho", 1024, 1536, small=False)}<figcaption>Cartaz oficial dos cursos.</figcaption></figure>
+    <h3 style="margin-top:30px">Novas turmas todos os meses</h3>
+    <ul class="months months--light" data-months="6" aria-label="Próximas turmas"></ul>
+    <figure class="poster" style="margin-top:28px">{pic("cartaz-cursos", "Cartaz dos cursos de exames cardíacos e respiratórios da Cardiomwenho", 1024, 1536, small=False)}<figcaption>Cartaz da turma de novembro. Há novas turmas todos os meses.</figcaption></figure>
   </div>
 </div></section>
 <section class="section"><div class="wrap split">

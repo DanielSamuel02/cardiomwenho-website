@@ -44,10 +44,10 @@
 </div></header>
 <div class="scrim" aria-hidden="true"></div>
 <main id="conteudo">
-<section class="phero"><div class="wrap">
+<section class="phero section--paper"><div class="wrap">
   <p class="crumbs" data-reveal><a href="/">Início</a> / Cursos</p>
   <h1 data-reveal style="--d:.05s">Cursos de exames cardíacos e respiratórios</h1>
-  <p class="lead" data-reveal style="--d:.12s">Capacite-se com quem tem experiência e faça a diferença na sua carreira. Início dos cursos em novembro.</p>
+  <p class="lead" data-reveal style="--d:.12s">Capacite-se com quem tem experiência e faça a diferença na sua carreira. Há novas turmas todos os meses.</p>
   <svg class="trace trace--draw" viewBox="0 0 1200 72" preserveAspectRatio="none" aria-hidden="true"><path class="line" pathLength="1" d="M0 44 H300 q12 -10 24 0 H350 l8 6 l12 -42 l14 58 l10 -22 H450 q20 -18 40 0 H760 q12 -10 24 0 H810 l8 6 l12 -42 l14 58 l10 -22 H910 q20 -18 40 0 H1200"/><path class="pulse" pathLength="1" d="M0 44 H300 q12 -10 24 0 H350 l8 6 l12 -42 l14 58 l10 -22 H450 q20 -18 40 0 H760 q12 -10 24 0 H810 l8 6 l12 -42 l14 58 l10 -22 H910 q20 -18 40 0 H1200"/></svg>
 </div></section>
 <section class="section--tight"><div class="wrap">
@@ -79,6 +79,7 @@
       </fieldset>
       <div class="field"><label for="f-nome">Nome completo</label><input id="f-nome" name="nome" type="text" data-label="Nome completo" required autocomplete="name" aria-describedby="e-nome"><span class="err" id="e-nome"></span></div>
       <div class="field"><label for="f-telefone">Telefone / WhatsApp</label><input id="f-telefone" name="telefone" type="tel" data-label="Telefone / WhatsApp" required autocomplete="tel" placeholder="9XX XXX XXX" inputmode="tel" aria-describedby="e-telefone"><span class="err" id="e-telefone"></span></div>
+      <div class="field"><label for="f-mes">Mês pretendido</label><select id="f-mes" name="mes" required data-label="Mês pretendido" data-months-select="6" aria-describedby="e-mes"><option value="">Escolha</option></select><span class="err" id="e-mes"></span></div>
       <div class="field"><label for="f-perfil">Situação</label><select id="f-perfil" name="perfil" required data-label="Situação" aria-describedby="e-perfil"><option value="">Escolha</option><option>Estudante da área da saúde</option><option>Profissional de saúde</option><option>Outra</option></select><span class="err" id="e-perfil"></span></div>
       <div class="field"><label for="f-inst">Instituição ou local de trabalho <span class="opt">(opcional)</span></label><input id="f-inst" name="inst" type="text" data-label="Instituição ou local de trabalho" autocomplete="organization" aria-describedby="e-inst"><span class="err" id="e-inst"></span></div>
       <label class="consent"><input type="checkbox" required name="consent"> <span>Aceito que estes dados sejam enviados à Cardiomwenho pelo WhatsApp para responder ao meu pedido. <a href="/privacidade">Saber mais</a></span></label>
@@ -102,7 +103,9 @@
       <li data-n="3"><b>10 mil</b><span>por curso, para quem fizer três cursos</span></li>
     </ul>
     <p class="note">Valores em kwanzas. Para quatro ou mais cursos, a equipa confirma o valor.</p>
-    <figure class="poster" style="margin-top:28px"><picture><source type="image/webp" srcset="/assets/img/cartaz-cursos.webp"><img src="/assets/img/cartaz-cursos.jpg" alt="Cartaz dos cursos de exames cardíacos e respiratórios da Cardiomwenho" width="1024" height="1536" loading="lazy" decoding="async"></picture><figcaption>Cartaz oficial dos cursos.</figcaption></figure>
+    <h3 style="margin-top:30px">Novas turmas todos os meses</h3>
+    <ul class="months months--light" data-months="6" aria-label="Próximas turmas"></ul>
+    <figure class="poster" style="margin-top:28px"><picture><source type="image/webp" srcset="/assets/img/cartaz-cursos.webp"><img src="/assets/img/cartaz-cursos.jpg" alt="Cartaz dos cursos de exames cardíacos e respiratórios da Cardiomwenho" width="1024" height="1536" loading="lazy" decoding="async"></picture><figcaption>Cartaz da turma de novembro. Há novas turmas todos os meses.</figcaption></figure>
   </div>
 </div></section>
 <section class="section"><div class="wrap split">

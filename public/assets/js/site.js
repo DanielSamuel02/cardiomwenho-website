@@ -79,6 +79,39 @@
     if (v && v.split(",").indexOf(cb.value) > -1) cb.checked = true;
   });
 
+
+  /* ---------- Turmas mensais (os cursos decorrem todos os meses) ---------- */
+  var MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+  function nextMonths(n) {
+    var d = new Date(), out = [];
+    for (var i = 0; i < n; i++) { var m = new Date(d.getFullYear(), d.getMonth() + i, 1); out.push({ m: MESES[m.getMonth()], y: m.getFullYear() }); }
+    return out;
+  }
+  $all("[data-months]").forEach(function (ul) {
+    ul.innerHTML = nextMonths(Number(ul.getAttribute("data-months")) || 6).map(function (x, i) {
+      return "<li><b>" + x.m.charAt(0).toUpperCase() + x.m.slice(1) + "</b><span>" + (i === 0 ? "Turma deste mês" : x.y) + "</span></li>";
+    }).join("");
+  });
+  $all("[data-months-select]").forEach(function (sel) {
+    nextMonths(Number(sel.getAttribute("data-months-select")) || 6).forEach(function (x) {
+      var o = document.createElement("option"); o.textContent = x.m.charAt(0).toUpperCase() + x.m.slice(1) + " de " + x.y; sel.appendChild(o);
+    });
+  });
+
+  /* ---------- Índice de exames: pré-visualização da fotografia ---------- */
+  var pv = $(".preview"), pvList = $("[data-preview]");
+  if (pv && pvList && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    var pvImg = $("img", pv), tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    function loop() { cx += (tx - cx) * .18; cy += (ty - cy) * .18; pv.style.left = cx + "px"; pv.style.top = cy + "px"; raf = requestAnimationFrame(loop); }
+    $all("a[data-img]", pvList).forEach(function (a) {
+      var pre = new Image(); pre.src = a.getAttribute("data-img");
+      a.addEventListener("mouseenter", function (e) { pvImg.src = a.getAttribute("data-img"); if (!raf) { cx = tx = e.clientX + 190; cy = ty = e.clientY; loop(); } pv.classList.add("is-on"); });
+      a.addEventListener("mousemove", function (e) { tx = e.clientX + 190; ty = e.clientY; });
+      a.addEventListener("mouseleave", function () { pv.classList.remove("is-on"); });
+    });
+    pvList.addEventListener("mouseleave", function () { if (raf) { cancelAnimationFrame(raf); raf = null; } });
+  }
+
   /* ---------- Vídeo do topo: pausar / reproduzir ---------- */
   var playIco = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
   var pauseIco = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
