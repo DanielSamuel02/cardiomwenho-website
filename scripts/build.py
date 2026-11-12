@@ -644,7 +644,7 @@ cursos = phero(["Cursos"], "Cursos de exames cardíacos e respiratórios",
   </div>
 </div></section>
 <section class="section"><div class="wrap split">
-  <figure data-reveal="zoom">{pic("formacao-grupo", "Participantes e formadores numa sessão de formação da Cardiomwenho", 1600, 900, sizes="(max-width: 860px) 92vw, 560px")}</figure>
+  <figure data-reveal="zoom">{pic("profissional", "Profissional da Cardiomwenho a realizar um eletrocardiograma num doente", 1100, 1375, sizes="(max-width: 860px) 92vw, 560px")}</figure>
   <div data-reveal="right"><h2>Aprenda onde os exames acontecem</h2>
   <p class="lead">Os cursos decorrem na Cardiomwenho, no Huambo, com os mesmos equipamentos usados no dia a dia da clínica.</p>
   <div class="actions"><a class="btn btn--red" href="#inscricao">Inscrever-me</a><a class="btn btn--line" href="/mentorias">Preciso de mentoria</a></div></div>
