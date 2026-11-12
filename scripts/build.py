@@ -340,7 +340,7 @@ home = f'''
 </div></section>
 
 <section class="team">
-  {pic("formacao-grupo", "Equipa e formandos da Cardiomwenho numa sessão de formação", 1600, 900, sizes="100vw")}
+  {pic("atendimento", "Profissional da Cardiomwenho a preparar um doente para uma espirometria", 1600, 1000, sizes="100vw", cls="team__img--atendimento")}
   <div class="team__cap"><div class="wrap"><p data-reveal>Equipa médica especializada, a atender particulares e empresas no Huambo.</p></div></div>
 </section>
 

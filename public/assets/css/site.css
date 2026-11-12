@@ -804,3 +804,7 @@ h1, h2, h3 { hyphens: manual; -webkit-hyphens: manual; overflow-wrap: break-word
    por isso a camada escura tem de ficar abaixo dele para os links serem clicáveis. */
 .scrim { z-index: 55; }
 body.menu-open .fab { opacity: 0; pointer-events: none; }
+
+/* 26. Fotografia da secção de equipa (atendimento) */
+.team img.team__img--atendimento { object-position: 55% 24%; }
+@media (max-width: 600px) { .team img.team__img--atendimento { object-position: 68% 24%; } }
